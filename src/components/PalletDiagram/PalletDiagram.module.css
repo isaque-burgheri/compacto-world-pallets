@@ -1,0 +1,83 @@
+.diagram {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.board {
+  fill: var(--pine);
+  animation: rise 600ms var(--ease-out-soft) both;
+}
+
+.batten {
+  fill: var(--pine-dark);
+}
+
+.stamp {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  fill: var(--ink);
+}
+
+.dimLine {
+  stroke: var(--gold);
+  stroke-width: 1;
+  fill: none;
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: draw 900ms var(--ease-out-soft) 700ms forwards;
+}
+
+.dimTick {
+  stroke: var(--gold);
+  stroke-width: 1;
+  opacity: 0;
+  animation: fadeIn 300ms var(--ease-out-soft) 1500ms forwards;
+}
+
+.dimLabel {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  fill: var(--gold);
+  opacity: 0;
+  animation: fadeIn 300ms var(--ease-out-soft) 1600ms forwards;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .board,
+  .dimLine,
+  .dimTick,
+  .dimLabel {
+    animation: none;
+    opacity: 1;
+    stroke-dashoffset: 0;
+    transform: none;
+  }
+}

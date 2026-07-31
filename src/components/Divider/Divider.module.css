@@ -1,0 +1,4 @@
+.divider {
+  height: 9px;
+  background: repeating-linear-gradient(90deg, var(--pine) 0 44px, transparent 44px 60px);
+}

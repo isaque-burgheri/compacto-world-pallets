@@ -1,0 +1,44 @@
+.section {
+  background: var(--ink);
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid rgba(231, 232, 226, 0.15);
+  border-left: 1px solid rgba(231, 232, 226, 0.15);
+}
+
+.cell {
+  padding: clamp(32px, 5vw, 56px);
+  border-right: 1px solid rgba(231, 232, 226, 0.15);
+  border-bottom: 1px solid rgba(231, 232, 226, 0.15);
+}
+
+.label {
+  color: var(--pine);
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: clamp(22px, 3vw, 30px);
+  color: var(--bone);
+  margin-bottom: 12px;
+}
+
+.title .highlight {
+  color: var(--gold);
+}
+
+.text {
+  max-width: 38ch;
+  color: rgba(231, 232, 226, 0.75);
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

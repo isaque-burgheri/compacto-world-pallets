@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "compacto-world-pallets",
+      "runtimeExecutable": "C:\\Users\\burgheri_contasimple\\AD\\.claude\\dev.bat",
+      "runtimeArgs": [],
+      "port": 5173
+    }
+  ]
+}
