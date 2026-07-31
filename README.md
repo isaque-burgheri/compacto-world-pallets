@@ -42,6 +42,17 @@ CTAs) ficam no JSX de cada seção, dentro de `src/components/<Nome>/<Nome>.jsx`
   baixam o vídeo inteiro quando o visitante aperta play, para não pesar o
   carregamento no celular.
 
+## Onde trocar a arte de marca do hero
+
+- O emblema exibido ao lado do H1 fica em
+  **[public/media/brand/emblem.webp](public/media/brand/emblem.webp)** e é
+  referenciado em `src/components/Hero/Hero.jsx`.
+- Essa imagem já vem com as bordas esmaecidas (fade para transparente) pra não
+  aparecer como um retângulo colado no fundo escuro — foi gerada a partir da
+  arte oficial fornecida pelo cliente, recortada e com um degradê radial de
+  transparência. Se for trocar por outra imagem, repita esse tratamento
+  (recorte + fade nas bordas) pra manter a mesma integração visual.
+
 ## Onde ficam os tokens de cor
 
 - **[src/tokens.css](src/tokens.css)** — todas as cores (`--ink`, `--navy`,
@@ -54,14 +65,14 @@ CTAs) ficam no JSX de cada seção, dentro de `src/components/<Nome>/<Nome>.jsx`
 
 ```
 public/media/gallery/    fotos e vídeos reais exibidos na Galeria
+public/media/brand/      emblema de marca usado no hero
 src/
   tokens.css              tokens globais + reset
   data/business.js        fonte única dos dados do negócio
   hooks/useReveal.js       reveal on scroll (IntersectionObserver)
   components/
     Header/                header fixo com nav e CTA
-    Hero/                   H1, CTAs, PalletDiagram
-    PalletDiagram/          desenho técnico SVG animado do palete PBR-1
+    Hero/                   H1, CTAs, emblema de marca (imagem)
     Divider/                motivo de tábuas entre seções
     PbrStandard/            texto + tabela de especificação
     Commitments/            grade 2x2 dos 4 compromissos

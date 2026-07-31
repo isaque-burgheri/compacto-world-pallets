@@ -1,5 +1,5 @@
 .hero {
-  padding-top: calc(66px + clamp(48px, 8vw, 96px));
+  padding-top: clamp(32px, 6vw, 64px);
   padding-bottom: clamp(56px, 8vw, 96px);
   padding-left: var(--gutter);
   padding-right: var(--gutter);
@@ -100,6 +100,31 @@
 
 .diagramWrap {
   width: 100%;
+}
+
+.emblem {
+  width: 100%;
+  height: auto;
+  max-width: 480px;
+  margin: 0 auto;
+  animation: emblemIn 900ms var(--ease-out-soft) both;
+}
+
+@keyframes emblemIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .emblem {
+    animation: none;
+  }
 }
 
 @media (max-width: 900px) {

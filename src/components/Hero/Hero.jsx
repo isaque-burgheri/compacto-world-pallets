@@ -1,5 +1,4 @@
 import { business, heroFacts } from '../../data/business'
-import PalletDiagram from '../PalletDiagram/PalletDiagram'
 import { useReveal } from '../../hooks/useReveal'
 import styles from './Hero.module.css'
 
@@ -43,7 +42,13 @@ export default function Hero() {
       </div>
 
       <div className={styles.diagramWrap}>
-        <PalletDiagram />
+        <img
+          className={styles.emblem}
+          src="/media/brand/emblem.webp"
+          alt="Marca Compacto World Pallets: globo com caminhão, guindaste e paletes, letreiro em madeira e dourado"
+          width="860"
+          height="900"
+        />
       </div>
     </section>
   )

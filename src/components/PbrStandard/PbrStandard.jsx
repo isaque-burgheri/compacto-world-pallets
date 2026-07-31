@@ -26,6 +26,10 @@ export default function PbrStandard() {
               Todos os nossos paletes PBR são novos — não são reformados nem recuperados. Isso significa
               madeira íntegra, pregos firmes e estrutura pronta para suportar carga desde o primeiro uso.
             </p>
+            <p>
+              Precisa de uma medida diferente da PBR? Também fazemos paletes sob medida, conforme a
+              necessidade do seu projeto — dimensões e capacidade sob consulta.
+            </p>
           </div>
         </div>
 
