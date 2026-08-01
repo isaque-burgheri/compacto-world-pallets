@@ -1,93 +1,113 @@
+/* O banner da marca é o fundo do hero: a arte ocupa a metade esquerda e a
+   metade direita foi desenhada vazia (céu) justamente para receber o texto. */
 .hero {
-  padding-top: clamp(32px, 6vw, 64px);
-  padding-bottom: clamp(56px, 8vw, 96px);
-  padding-left: var(--gutter);
-  padding-right: var(--gutter);
+  position: relative;
+  isolation: isolate;
+  margin-top: 66px; /* altura do header fixo — mantém a arte inteira visível */
+  background: var(--bone);
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: clamp(32px, 6vw, 64px);
+  grid-template-columns: 53% 47%;
   align-items: center;
+  aspect-ratio: 2000 / 729;
+}
+
+.banner {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left center;
 }
 
 .copy {
+  position: relative;
+  z-index: 1;
+  grid-column: 2;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  order: 2;
+  gap: clamp(12px, 1.6vw, 22px);
+  padding-right: var(--gutter);
 }
 
 .title {
-  font-size: var(--h1-size);
-  color: var(--bone);
+  font-size: clamp(26px, 3.4vw, 60px);
+  color: var(--ink);
 }
 
+/* Sobre o céu claro o dourado não tem contraste como texto, então ele vira
+   um bloco estampado com o texto em --ink (AA garantido). */
 .title .highlight {
-  color: var(--gold);
+  background: var(--gold);
+  color: var(--ink);
+  padding: 0 0.14em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
 .lede {
-  max-width: 46ch;
-  font-size: 18px;
-  color: rgba(231, 232, 226, 0.85);
+  max-width: 34ch;
+  font-size: clamp(14px, 1.15vw, 18px);
+  color: rgba(8, 31, 64, 0.82);
 }
 
 .ctas {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   flex-wrap: wrap;
-  margin-top: 8px;
 }
 
-.ctaPrimary {
-  background: var(--gold);
-  color: var(--ink);
+.ctaPrimary,
+.ctaGhost {
   font-family: var(--font-mono);
   font-weight: 600;
-  font-size: 13px;
+  font-size: clamp(10px, 0.85vw, 13px);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 16px 28px;
+  padding: clamp(11px, 1.1vw, 16px) clamp(16px, 1.7vw, 28px);
   border-radius: 3px;
-  transition: background 200ms ease, transform 200ms ease;
+  white-space: nowrap;
+  transition: background 200ms ease, border-color 200ms ease, transform 200ms ease;
+}
+
+/* Pílula escura com texto dourado — mesma linguagem da barra de contato da arte. */
+.ctaPrimary {
+  background: var(--ink);
+  color: var(--gold);
+  border: 1px solid var(--ink);
 }
 
 .ctaPrimary:hover {
-  background: var(--gold-lit);
+  background: var(--navy);
+  color: var(--gold-lit);
   transform: translateY(-1px);
 }
 
 .ctaGhost {
-  border: 1px solid rgba(231, 232, 226, 0.35);
-  color: var(--bone);
-  font-family: var(--font-mono);
-  font-weight: 600;
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 16px 28px;
-  border-radius: 3px;
-  transition: border-color 200ms ease, background 200ms ease;
+  border: 1px solid rgba(8, 31, 64, 0.45);
+  color: var(--ink);
 }
 
 .ctaGhost:hover {
-  border-color: var(--gold-lit);
-  background: rgba(255, 210, 74, 0.08);
+  border-color: var(--ink);
+  background: rgba(8, 31, 64, 0.06);
 }
 
 .facts {
   display: flex;
-  margin-top: 16px;
+  flex-wrap: wrap;
 }
 
 .fact {
   font-family: var(--font-mono);
   font-weight: 600;
-  font-size: 12px;
+  font-size: clamp(9px, 0.8vw, 12px);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--bone);
-  padding: 0 24px;
-  border-left: 1px solid rgba(231, 232, 226, 0.2);
+  color: var(--ink);
+  padding: 0 clamp(10px, 1.3vw, 24px);
+  border-left: 1px solid rgba(8, 31, 64, 0.28);
 }
 
 .fact:first-child {
@@ -95,45 +115,49 @@
   border-left: none;
 }
 
-.diagramWrap {
-  width: 100%;
-  order: 1;
-}
-
-.emblem {
-  width: 100%;
-  height: auto;
-  max-width: 480px;
-  margin: 0 auto;
-  animation: emblemIn 900ms var(--ease-out-soft) both;
-}
-
-@keyframes emblemIn {
-  from {
-    opacity: 0;
-    transform: scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .emblem {
-    animation: none;
-  }
-}
-
-@media (max-width: 900px) {
+/* Abaixo de 1000px o céu vazio fica pequeno demais para o texto: a arte passa
+   a ser exibida inteira no topo e o texto vai para baixo, sobre --bone. */
+@media (max-width: 1000px) {
   .hero {
+    aspect-ratio: auto;
     grid-template-columns: 1fr;
+    padding-bottom: clamp(32px, 6vw, 56px);
   }
 
-  .diagramWrap {
-    order: -1;
-    max-width: 420px;
-    margin: 0 auto;
+  /* Empilhado: mostra só a metade da arte (o céu vazio da direita não serve
+     mais de espaço para texto aqui), então ela ocupa a largura toda. */
+  .banner {
+    position: static;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1000 / 729;
+    object-fit: cover;
+    object-position: left center;
+  }
+
+  .copy {
+    grid-column: 1;
+    gap: 20px;
+    padding: clamp(28px, 5vw, 44px) var(--gutter) 0;
+  }
+
+  .title {
+    font-size: clamp(32px, 7vw, 52px);
+  }
+
+  .lede {
+    max-width: 46ch;
+    font-size: 17px;
+  }
+
+  .ctaPrimary,
+  .ctaGhost {
+    font-size: 13px;
+    padding: 16px 28px;
+  }
+
+  .fact {
+    font-size: 12px;
   }
 }
 
@@ -144,8 +168,8 @@
 
   .ctaPrimary,
   .ctaGhost {
-    text-align: center;
     width: 100%;
+    text-align: center;
   }
 
   .facts {
@@ -156,7 +180,7 @@
   .fact {
     padding: 0;
     border-left: none;
-    border-top: 1px solid rgba(231, 232, 226, 0.2);
+    border-top: 1px solid rgba(8, 31, 64, 0.28);
     padding-top: 10px;
   }
 

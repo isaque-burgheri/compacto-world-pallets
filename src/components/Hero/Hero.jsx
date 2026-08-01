@@ -7,6 +7,15 @@ export default function Hero() {
 
   return (
     <section className={styles.hero}>
+      <img
+        className={styles.banner}
+        src="/media/brand/hero-banner.webp"
+        alt="Arte da Compacto World Pallets: globo cercado de paletes, caminhões e guindastes, com os diferenciais paletes PBR novos, primeira qualidade, qualidade garantida e entrega em São Paulo"
+        width="2000"
+        height="729"
+        fetchpriority="high"
+      />
+
       <div className={`${styles.copy} reveal`} ref={revealRef}>
         <h1 className={`heading ${styles.title}`}>
           Paletes PBR novos e sob medida,
@@ -25,7 +34,7 @@ export default function Hero() {
           >
             Pedir orçamento no WhatsApp
           </a>
-          <a className={styles.ctaGhost} href={`tel:+5511921218541`}>
+          <a className={styles.ctaGhost} href="tel:+5511921218541">
             {business.whatsapp[0].label}
           </a>
         </div>
@@ -37,16 +46,6 @@ export default function Hero() {
             </span>
           ))}
         </div>
-      </div>
-
-      <div className={styles.diagramWrap}>
-        <img
-          className={styles.emblem}
-          src="/media/brand/emblem.webp"
-          alt="Marca Compacto World Pallets: globo com caminhão, guindaste e paletes, letreiro em madeira e dourado"
-          width="860"
-          height="900"
-        />
       </div>
     </section>
   )
