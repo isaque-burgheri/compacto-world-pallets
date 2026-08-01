@@ -110,6 +110,51 @@ resto do site (que é só foto real ou gráfico em código). Os dados de cada ca
 consulta" na carga porque não temos capacidade confirmada, mesmo a referência
 usada mostrando números fixos.
 
+## Vídeo controlado por scroll (2ª seção)
+
+À direita do título "Paletes PBR novos e sob medida..." (bloco `.pitch` do
+`PbrStandard.jsx`) tem um vídeo que avança/retrocede conforme o scroll, e a
+seção fica "travada" na tela enquanto ele não termina.
+
+- **[src/hooks/useScrollScrub.js](src/hooks/useScrollScrub.js)** — a lógica:
+  o contêiner (`.pitchScrub`) é mais alto que a viewport (100vh visível + 220vh
+  de "pista" de scroll); enquanto se rola por essa pista, o hook calcula o
+  progresso (0 a 1) e seta `video.currentTime = progresso × duração`. O "travar
+  na tela" é feito com `position: sticky` (não é scroll-jacking via JS/
+  `preventDefault`) — por isso a página sempre continua rolando normalmente
+  depois, sem trecho nenhum de código pra "destravar".
+- Pra ajustar a velocidade do scrub, mude `220vh` em
+  `PbrStandard.module.css` (`.pitchScrub`) — mais alto = rolagem mais lenta/
+  longa até o vídeo terminar.
+- **Sem efeito** (vídeo normal, em loop mudo, sem seção travada) em duas
+  situações: `prefers-reduced-motion: reduce` ou telas ≤900px — controlado por
+  `narrowBreakpoint` em `useScrollScrub`.
+- O vídeo é sempre mudo e sem controles (`muted`, sem `controls`), só decorativo
+  (`aria-hidden`).
+
+### Sobre o arquivo de vídeo
+
+O vídeo enviado (`Downloads/pallett.mp4`, 1920×1080, 30fps, 16,7 MB) tinha
+só **2 keyframes em 201 frames** — nesse formato, buscar um frame arbitrário
+(o que o scroll-scrub faz o tempo todo) trava, porque o navegador precisa
+decodificar a partir do keyframe anterior a cada busca. Reencodei com ffmpeg
+pra **cada frame ser um keyframe** (`-g 1 -keyint_min 1 -sc_threshold 0`),
+reduzindo também a resolução (960×540) e removendo o áudio (o vídeo é mudo).
+Resultado: **[public/media/video/pitch-scroll.mp4](public/media/video/pitch-scroll.mp4)**,
+1,4 MB, busca instantânea em qualquer frame — confirmei com `ffprobe` que os
+201 frames do arquivo final são todos keyframes.
+
+Se for trocar o vídeo, reencode com o mesmo comando (ajustando duração/
+resolução conforme o novo arquivo):
+
+```bash
+ffmpeg -i entrada.mp4 -an -vf "scale=960:-2" \
+  -c:v libx264 -profile:v high -pix_fmt yuv420p \
+  -g 1 -keyint_min 1 -sc_threshold 0 \
+  -crf 28 -preset slow -movflags +faststart \
+  public/media/video/pitch-scroll.mp4
+```
+
 ## Reveal on scroll
 
 O efeito de entrada (opacidade 0 → 1, `translateY(24px)` → posição original) é
@@ -165,6 +210,7 @@ do formulário, para quem preferir não preencher nada.
 public/media/gallery/    fotos e vídeos reais exibidos na Galeria
 public/media/brand/      banner da marca usado como fundo do hero
 public/media/products/   fotos de estoque usadas nos cards de produto
+public/media/video/      vídeo controlado por scroll (2ª seção)
 src/
   tokens.css              tokens globais + reset
   data/business.js        fonte única dos dados do negócio

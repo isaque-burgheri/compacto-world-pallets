@@ -5,14 +5,64 @@
   padding-right: var(--gutter);
 }
 
-/* --- Bloco principal: a escrita que antes ficava sobre a imagem do topo --- */
+/* --- Bloco principal: a escrita que antes ficava sobre a imagem do topo,
+   agora ao lado do vídeo controlado por scroll --- */
+
+/* Contêiner alto: dá "pista" de scroll pro vídeo avançar. 100vh visível +
+   220vh de percurso — ajuste esse segundo número pra rolar mais rápido/devagar. */
+.pitchScrub {
+  position: relative;
+  height: calc(100vh + 220vh);
+  margin-bottom: clamp(40px, 6vw, 72px);
+  border-bottom: 1px solid rgba(6, 22, 46, 0.15);
+}
+
+/* Fallback (reduced-motion ou telas ≤900px): sem altura extra, sem pin. */
+.pitchScrubStatic {
+  margin-bottom: clamp(40px, 6vw, 72px);
+  border-bottom: 1px solid rgba(6, 22, 46, 0.15);
+}
+
+/* Gruda logo abaixo do header fixo (66px) enquanto dura o percurso de scroll
+   do .pitchScrub — isso é o que "trava" a seção na tela. */
+.pitchScrub .pitchSticky {
+  position: sticky;
+  top: 66px;
+  height: calc(100vh - 66px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(32px, 6vw, 64px);
+  overflow: hidden;
+}
+
+.pitchScrubStatic .pitchSticky {
+  padding-top: clamp(40px, 6vw, 72px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(32px, 6vw, 64px);
+}
+
+.pitchVideoCol {
+  display: flex;
+}
+
+.pitchVideo {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  border: 1px solid rgba(6, 22, 46, 0.15);
+  border-radius: 4px;
+  background: var(--ink);
+}
+
 .pitch {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  padding-bottom: clamp(40px, 6vw, 72px);
-  margin-bottom: clamp(40px, 6vw, 72px);
-  border-bottom: 1px solid rgba(6, 22, 46, 0.15);
 }
 
 .pitchTitle {
@@ -162,6 +212,19 @@
 @media (max-width: 900px) {
   .grid {
     grid-template-columns: 1fr;
+  }
+
+  /* Abaixo de 900px o scroll-scrub já vem desativado via JS (useScrollScrub),
+     mas garantimos aqui também a coluna única para não piscar 2 colunas
+     apertadas antes do JS assentar. */
+  .pitchScrub .pitchSticky,
+  .pitchScrubStatic .pitchSticky {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .pitchVideoCol {
+    order: -1;
   }
 }
 

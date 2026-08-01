@@ -1,41 +1,77 @@
+import { useRef } from 'react'
 import { business, heroFacts, pbrSpec } from '../../data/business'
 import Reveal from '../Reveal/Reveal'
+import { useScrollScrub } from '../../hooks/useScrollScrub'
 import styles from './PbrStandard.module.css'
 
+function PitchCopy() {
+  return (
+    <>
+      <h1 className={`heading ${styles.pitchTitle}`}>
+        Paletes PBR novos e sob medida,
+        <br />
+        prontos <span className={styles.highlight}>para carga.</span>
+      </h1>
+
+      <p className={styles.pitchLede}>{business.materialCall}.</p>
+
+      <div className={styles.ctas}>
+        <a
+          className={styles.ctaPrimary}
+          href={business.whatsapp[0].url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Pedir orçamento no WhatsApp
+        </a>
+        <a className={styles.ctaGhost} href="tel:+5511921218541">
+          {business.whatsapp[0].label}
+        </a>
+      </div>
+
+      <div className={styles.facts}>
+        {heroFacts.map((fact) => (
+          <span key={fact} className={styles.fact}>
+            {fact}
+          </span>
+        ))}
+      </div>
+    </>
+  )
+}
+
 export default function PbrStandard() {
+  const wrapRef = useRef(null)
+  const videoRef = useRef(null)
+  const { isStatic } = useScrollScrub(wrapRef, videoRef)
+
   return (
     <section id="padrao-pbr" className={`${styles.section} band`}>
-      <Reveal as="div" className={styles.pitch}>
-        <h1 className={`heading ${styles.pitchTitle}`}>
-          Paletes PBR novos e sob medida,
-          <br />
-          prontos <span className={styles.highlight}>para carga.</span>
-        </h1>
+      <div ref={wrapRef} className={isStatic ? styles.pitchScrubStatic : styles.pitchScrub}>
+        <div className={styles.pitchSticky}>
+          <Reveal as="div" className={styles.pitch}>
+            <PitchCopy />
+          </Reveal>
 
-        <p className={styles.pitchLede}>{business.materialCall}.</p>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.ctaPrimary}
-            href={business.whatsapp[0].url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Pedir orçamento no WhatsApp
-          </a>
-          <a className={styles.ctaGhost} href="tel:+5511921218541">
-            {business.whatsapp[0].label}
-          </a>
+          <div className={styles.pitchVideoCol}>
+            {/* Vídeo mudo, sem controles. No desktop avança/retrocede com o
+                scroll (useScrollScrub); em reduced-motion ou telas estreitas
+                vira um loop ambiente simples. Puramente decorativo. */}
+            <video
+              ref={videoRef}
+              className={styles.pitchVideo}
+              src="/media/video/pitch-scroll.mp4"
+              muted
+              playsInline
+              preload="auto"
+              autoPlay={isStatic}
+              loop={isStatic}
+              aria-hidden="true"
+              tabIndex={-1}
+            />
+          </div>
         </div>
-
-        <div className={styles.facts}>
-          {heroFacts.map((fact) => (
-            <span key={fact} className={styles.fact}>
-              {fact}
-            </span>
-          ))}
-        </div>
-      </Reveal>
+      </div>
 
       <Reveal as="div" className={styles.grid} delay={150}>
         <div>
