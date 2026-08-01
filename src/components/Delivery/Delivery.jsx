@@ -39,6 +39,16 @@ export default function Delivery() {
             </div>
           ))}
         </div>
+
+        <div className={styles.mapWrap}>
+          <iframe
+            src={`https://www.google.com/maps?q=${encodeURIComponent(business.address)}&output=embed`}
+            title={`Mapa: ${business.address}`}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          />
+        </div>
       </div>
     </section>
   )

@@ -64,6 +64,13 @@ resto do site (que é só foto real ou gráfico em código). Os dados de cada ca
 consulta" na carga porque não temos capacidade confirmada, mesmo a referência
 usada mostrando números fixos.
 
+## Sobre o mapa
+
+A seção "Entrega" (`#entrega`) embute um mapa do Google Maps via `<iframe>`
+(sem precisar de chave de API), apontando pro endereço real da Compacto em
+`src/data/business.js` (`business.address`). Se o endereço mudar nesse
+arquivo, o mapa atualiza sozinho — não precisa mexer no `Delivery.jsx`.
+
 ## Sobre o formulário de orçamento
 
 A seção final (`#orcamento`) tem um formulário (Nome, Empresa, Quantidade,
