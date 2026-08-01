@@ -42,40 +42,61 @@ CTAs) ficam no JSX de cada seção, dentro de `src/components/<Nome>/<Nome>.jsx`
   baixam o vídeo inteiro quando o visitante aperta play, para não pesar o
   carregamento no celular.
 
-## O banner do hero (arte de marca como fundo)
+## O banner do topo e a escrita principal
 
-O topo do site é a arte oficial da Compacto usada como fundo:
-**[public/media/brand/hero-banner.webp](public/media/brand/hero-banner.webp)**,
-referenciada em `src/components/Hero/Hero.jsx`.
+O topo da página (`src/components/Hero/Hero.jsx`) é **só a arte oficial da
+Compacto**, sem texto por cima:
+**[public/media/brand/hero-banner.webp](public/media/brand/hero-banner.webp)**.
 
-A arte foi desenhada com a metade esquerda ocupada (globo + diferenciais +
-barra de contato) e a metade direita vazia (céu) — é nesse vazio que entram o
-H1, o lede, os CTAs e a faixa de fatos.
+Toda a escrita — H1, lede, os dois CTAs e a faixa de fatos — vive no começo da
+seção seguinte (`src/components/PbrStandard/PbrStandard.jsx`, bloco `.pitch`),
+separada da ficha técnica por uma hairline.
 
-- **Acima de 1000px**: o banner é posicionado atrás do conteúdo (`object-fit:
-  cover`, ancorado à esquerda) e o hero usa `aspect-ratio: 2000/729`, então a
-  arte aparece inteira, sem corte, em qualquer largura.
-- **Até 1000px**: o céu vazio da direita fica pequeno demais para texto, então o
-  banner é recortado na metade da arte (`aspect-ratio: 1000/729`) e exibido
-  inteiro no topo; o texto desce para baixo dele, sobre `--bone`.
-- Como o fundo é claro, o texto do hero é escuro (`--ink`) e o destaque do H1
-  virou um **bloco estampado dourado com texto escuro** — o dourado como cor de
-  texto não tem contraste sobre o céu claro. O CTA principal é pílula escura com
-  texto dourado, mesma linguagem da barra de contato da arte.
+- **Acima de 1000px**: o banner aparece inteiro, na largura total, sem recorte
+  nenhum.
+- **Até 1000px**: na faixa larga o desenho ficaria minúsculo, então a imagem é
+  recortada em volta dele (`aspect-ratio: 4/3` + `object-position: 52%`), que é
+  onde o desenho está na arte.
+- Como a seção é clara (`--bone`), o destaque do H1 é um **bloco estampado
+  dourado com texto escuro** — o dourado como cor de texto não teria contraste.
+  O CTA principal é pílula escura com texto dourado, mesma linguagem da barra de
+  contato da arte. Contrastes medidos: 13,3:1 (H1), 8,8:1 (estampa e botão).
+
+### Barra de contato
+
+A pílula de contato sobre a faixa azul da arte é HTML de verdade
+(`src/components/ContactBar/ContactBar.jsx`), não parte da imagem — os ícones
+são SVG inline. Cada item é clicável:
+
+| Item | Vai para |
+| --- | --- |
+| Endereço | Google Maps (`business.mapsUrl`, gerado a partir de `business.address`) |
+| (11) 92121-8541 | WhatsApp 1, com a mensagem pré-preenchida |
+| (11) 99102-3133 | WhatsApp 2, com a mensagem pré-preenchida |
+| Entre em contato | `mailto:` de `business.email` |
+
+> **⚠️ O e-mail é um placeholder.** `business.email` está como
+> `contato@exemplo.com.br` em [src/data/business.js](src/data/business.js).
+> Trocar pelo e-mail real antes de publicar.
+
+Acima de 1000px a pílula é posicionada sobre a faixa azul da arte; abaixo disso
+ela sai de cima da imagem e vira um bloco logo abaixo dela, com os três grupos
+empilhados.
 
 ### Texto corrigido dentro da imagem
 
-A versão do banner recebida trazia as quatro descrições dos diferenciais com
-texto quebrado (ex.: *"Produtas navas e do sho peorho."*). Elas foram apagadas e
-reescritas corretamente sobre o mesmo fundo, na mesma posição e fonte. O arquivo
-original, como recebido, está preservado em
-`public/media/brand/hero-banner-original.webp` — se um dia chegar uma versão
-nova e correta da arte, basta substituir `hero-banner.webp`.
+As artes recebidas vinham com as descrições dos diferenciais escritas errado
+(ex.: *"Produtas navas e do sho peorho."*, *"de alto padrád."*,
+*"resistencia"*). As linhas erradas foram apagadas e reescritas corretas sobre o
+mesmo fundo, na mesma posição e com fonte equivalente (Segoe UI Semibold). O
+arquivo como recebido está preservado em
+`public/media/brand/hero-banner-original.webp` — se chegar uma versão nova e
+já correta da arte, basta substituir `hero-banner.webp`.
 
 > Nota: a arte escreve "PALETS" no título, enquanto o material oficial da
 > empresa usa "paletes". Isso veio assim da arte e **não** foi alterado.
 
-`emblem.webp` é a versão anterior do hero (emblema recortado com bordas
+`emblem.webp` é uma versão anterior do topo (emblema recortado com bordas
 esmaecidas); ficou no repositório para facilitar voltar atrás.
 
 ## Sobre as fotos da seção "Nossos paletes"
@@ -126,6 +147,7 @@ src/
   hooks/useReveal.js       reveal on scroll (IntersectionObserver)
   components/
     Header/                header fixo com nav e CTA
+    ContactBar/             pílula de contato (maps, 2 WhatsApps, e-mail)
     Hero/                   banner da marca como fundo + H1, CTAs e fatos
     Divider/                motivo de tábuas entre seções
     PbrStandard/            texto + tabela de especificação

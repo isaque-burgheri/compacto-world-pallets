@@ -1,4 +1,5 @@
 const WHATSAPP_MESSAGE = 'Olá! Preciso de um orçamento de paletes PBR novos.'
+const ADDRESS = 'Av. Adriano Bertozzi, 563 — São Paulo/SP'
 
 export function buildWhatsAppUrl(number, message) {
   return `https://wa.me/${number}?text=${encodeURIComponent(message)}`
@@ -9,7 +10,12 @@ export const business = {
   tagline: 'Compromisso, qualidade e agilidade em cada entrega',
   materialCall: 'Soluções em paletes com qualidade e confiança',
   product: 'Paletes PBR novos, primeira qualidade',
-  address: 'Av. Adriano Bertozzi, 563 — São Paulo/SP',
+  address: ADDRESS,
+  // Endereço quebrado em 2 linhas para a barra de contato
+  addressLines: ['Av. Adriano Bertozzi, 563', 'São Paulo - SP'],
+  mapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS)}`,
+  // CONFIRMAR: e-mail real da Compacto. Este é um placeholder de teste.
+  email: 'contato@exemplo.com.br',
   deliveryArea: 'São Paulo e região',
   whatsapp: [
     {

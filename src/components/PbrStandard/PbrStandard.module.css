@@ -5,6 +5,104 @@
   padding-right: var(--gutter);
 }
 
+/* --- Bloco principal: a escrita que antes ficava sobre a imagem do topo --- */
+.pitch {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-bottom: clamp(40px, 6vw, 72px);
+  margin-bottom: clamp(40px, 6vw, 72px);
+  border-bottom: 1px solid rgba(6, 22, 46, 0.15);
+}
+
+.pitchTitle {
+  font-size: var(--h1-size);
+  color: var(--ink);
+  max-width: 24ch;
+}
+
+/* Sobre fundo claro o dourado não tem contraste como texto, então o destaque
+   é um bloco estampado com o texto em --ink. */
+.pitchTitle .highlight {
+  background: var(--gold);
+  color: var(--ink);
+  padding: 0 0.14em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.pitchLede {
+  max-width: 46ch;
+  font-size: 18px;
+  color: rgba(6, 22, 46, 0.8);
+}
+
+.ctas {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.ctaPrimary,
+.ctaGhost {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 16px 28px;
+  border-radius: 3px;
+  white-space: nowrap;
+  transition: background 200ms ease, border-color 200ms ease, transform 200ms ease;
+}
+
+/* Pílula escura com texto dourado — mesma linguagem da barra de contato da arte. */
+.ctaPrimary {
+  background: var(--ink);
+  color: var(--gold);
+  border: 1px solid var(--ink);
+}
+
+.ctaPrimary:hover {
+  background: var(--navy);
+  color: var(--gold-lit);
+  transform: translateY(-1px);
+}
+
+.ctaGhost {
+  border: 1px solid rgba(6, 22, 46, 0.45);
+  color: var(--ink);
+}
+
+.ctaGhost:hover {
+  border-color: var(--ink);
+  background: rgba(6, 22, 46, 0.06);
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.fact {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding: 0 24px;
+  border-left: 1px solid rgba(6, 22, 46, 0.28);
+}
+
+.fact:first-child {
+  padding-left: 0;
+  border-left: none;
+}
+
+/* --- Ficha técnica --- */
 .grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -64,5 +162,34 @@
 @media (max-width: 900px) {
   .grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .ctas {
+    flex-direction: column;
+  }
+
+  .ctaPrimary,
+  .ctaGhost {
+    width: 100%;
+    text-align: center;
+  }
+
+  .facts {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .fact {
+    padding: 0;
+    border-left: none;
+    border-top: 1px solid rgba(6, 22, 46, 0.28);
+    padding-top: 10px;
+  }
+
+  .fact:first-child {
+    border-top: none;
+    padding-top: 0;
   }
 }

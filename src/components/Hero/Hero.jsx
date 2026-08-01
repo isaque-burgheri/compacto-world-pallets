@@ -1,10 +1,7 @@
-import { business, heroFacts } from '../../data/business'
-import { useReveal } from '../../hooks/useReveal'
+import ContactBar from '../ContactBar/ContactBar'
 import styles from './Hero.module.css'
 
 export default function Hero() {
-  const revealRef = useReveal()
-
   return (
     <section className={styles.hero}>
       <img
@@ -16,37 +13,7 @@ export default function Hero() {
         fetchpriority="high"
       />
 
-      <div className={`${styles.copy} reveal`} ref={revealRef}>
-        <h1 className={`heading ${styles.title}`}>
-          Paletes PBR novos e sob medida,
-          <br />
-          prontos <span className={styles.highlight}>para carga.</span>
-        </h1>
-
-        <p className={styles.lede}>{business.materialCall}.</p>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.ctaPrimary}
-            href={business.whatsapp[0].url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Pedir orçamento no WhatsApp
-          </a>
-          <a className={styles.ctaGhost} href="tel:+5511921218541">
-            {business.whatsapp[0].label}
-          </a>
-        </div>
-
-        <div className={styles.facts}>
-          {heroFacts.map((fact) => (
-            <span key={fact} className={styles.fact}>
-              {fact}
-            </span>
-          ))}
-        </div>
-      </div>
+      <ContactBar className={styles.contact} />
     </section>
   )
 }

@@ -1,191 +1,49 @@
-/* O banner da marca é o fundo do hero: a arte ocupa a metade esquerda e a
-   metade direita foi desenhada vazia (céu) justamente para receber o texto. */
+/* Abertura da página: a arte oficial da marca ocupa a faixa inteira. A barra de
+   contato é montada em HTML e assenta sobre a faixa azul da própria arte —
+   mesmo lugar onde ela aparecia desenhada nas versões anteriores. */
 .hero {
   position: relative;
-  isolation: isolate;
-  margin-top: 66px; /* altura do header fixo — mantém a arte inteira visível */
+  margin-top: 66px; /* altura do header fixo */
   background: var(--bone);
-  display: grid;
-  grid-template-columns: 53% 47%;
-  align-items: center;
-  aspect-ratio: 2000 / 729;
+  line-height: 0; /* elimina o espaço extra abaixo da imagem inline */
 }
 
 .banner {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: left center;
+  height: auto;
 }
 
-.copy {
-  position: relative;
-  z-index: 1;
-  grid-column: 2;
-  display: flex;
-  flex-direction: column;
-  gap: clamp(12px, 1.6vw, 22px);
-  padding-right: var(--gutter);
+/* A faixa azul da arte vai de 82,7% a 90,3% da altura. A pílula é mais alta que
+   a faixa, então fica ancorada um pouco abaixo dela: assim não encobre a última
+   linha do painel de diferenciais da arte e só encosta na margem em branco da
+   barra amarela. */
+.contact {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100% - 2 * var(--gutter));
 }
 
-.title {
-  font-size: clamp(26px, 3.4vw, 60px);
-  color: var(--ink);
-}
-
-/* Sobre o céu claro o dourado não tem contraste como texto, então ele vira
-   um bloco estampado com o texto em --ink (AA garantido). */
-.title .highlight {
-  background: var(--gold);
-  color: var(--ink);
-  padding: 0 0.14em;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
-}
-
-.lede {
-  max-width: 34ch;
-  font-size: clamp(14px, 1.15vw, 18px);
-  color: rgba(8, 31, 64, 0.82);
-}
-
-.ctas {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.ctaPrimary,
-.ctaGhost {
-  font-family: var(--font-mono);
-  font-weight: 600;
-  font-size: clamp(10px, 0.85vw, 13px);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: clamp(11px, 1.1vw, 16px) clamp(16px, 1.7vw, 28px);
-  border-radius: 3px;
-  white-space: nowrap;
-  transition: background 200ms ease, border-color 200ms ease, transform 200ms ease;
-}
-
-/* Pílula escura com texto dourado — mesma linguagem da barra de contato da arte. */
-.ctaPrimary {
-  background: var(--ink);
-  color: var(--gold);
-  border: 1px solid var(--ink);
-}
-
-.ctaPrimary:hover {
-  background: var(--navy);
-  color: var(--gold-lit);
-  transform: translateY(-1px);
-}
-
-.ctaGhost {
-  border: 1px solid rgba(8, 31, 64, 0.45);
-  color: var(--ink);
-}
-
-.ctaGhost:hover {
-  border-color: var(--ink);
-  background: rgba(8, 31, 64, 0.06);
-}
-
-.facts {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.fact {
-  font-family: var(--font-mono);
-  font-weight: 600;
-  font-size: clamp(9px, 0.8vw, 12px);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink);
-  padding: 0 clamp(10px, 1.3vw, 24px);
-  border-left: 1px solid rgba(8, 31, 64, 0.28);
-}
-
-.fact:first-child {
-  padding-left: 0;
-  border-left: none;
-}
-
-/* Abaixo de 1000px o céu vazio fica pequeno demais para o texto: a arte passa
-   a ser exibida inteira no topo e o texto vai para baixo, sobre --bone. */
+/* Em telas estreitas a arte é recortada em volta do desenho (que fica em ~52%
+   da largura) e a barra de contato sai de cima da imagem. */
 @media (max-width: 1000px) {
   .hero {
-    aspect-ratio: auto;
-    grid-template-columns: 1fr;
-    padding-bottom: clamp(32px, 6vw, 56px);
+    padding-bottom: clamp(24px, 4vw, 36px);
   }
 
-  /* Empilhado: mostra só a metade da arte (o céu vazio da direita não serve
-     mais de espaço para texto aqui), então ela ocupa a largura toda. */
   .banner {
-    position: static;
-    width: 100%;
     height: auto;
-    aspect-ratio: 1000 / 729;
+    aspect-ratio: 4 / 3;
     object-fit: cover;
-    object-position: left center;
+    object-position: 52% center;
   }
 
-  .copy {
-    grid-column: 1;
-    gap: 20px;
-    padding: clamp(28px, 5vw, 44px) var(--gutter) 0;
-  }
-
-  .title {
-    font-size: clamp(32px, 7vw, 52px);
-  }
-
-  .lede {
-    max-width: 46ch;
-    font-size: 17px;
-  }
-
-  .ctaPrimary,
-  .ctaGhost {
-    font-size: 13px;
-    padding: 16px 28px;
-  }
-
-  .fact {
-    font-size: 12px;
-  }
-}
-
-@media (max-width: 560px) {
-  .ctas {
-    flex-direction: column;
-  }
-
-  .ctaPrimary,
-  .ctaGhost {
-    width: 100%;
-    text-align: center;
-  }
-
-  .facts {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .fact {
-    padding: 0;
-    border-left: none;
-    border-top: 1px solid rgba(8, 31, 64, 0.28);
-    padding-top: 10px;
-  }
-
-  .fact:first-child {
-    border-top: none;
-    padding-top: 0;
+  .contact {
+    position: static;
+    transform: none;
+    max-width: none;
+    margin: clamp(20px, 4vw, 32px) var(--gutter) 0;
   }
 }

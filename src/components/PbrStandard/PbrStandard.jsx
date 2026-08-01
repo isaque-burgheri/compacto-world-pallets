@@ -1,13 +1,46 @@
-import { pbrSpec } from '../../data/business'
+import { business, heroFacts, pbrSpec } from '../../data/business'
 import { useReveal } from '../../hooks/useReveal'
 import styles from './PbrStandard.module.css'
 
 export default function PbrStandard() {
-  const revealRef = useReveal()
+  const pitchRef = useReveal()
+  const gridRef = useReveal()
 
   return (
     <section id="padrao-pbr" className={`${styles.section} band`}>
-      <div className={`${styles.grid} reveal`} ref={revealRef}>
+      <div className={`${styles.pitch} reveal`} ref={pitchRef}>
+        <h1 className={`heading ${styles.pitchTitle}`}>
+          Paletes PBR novos e sob medida,
+          <br />
+          prontos <span className={styles.highlight}>para carga.</span>
+        </h1>
+
+        <p className={styles.pitchLede}>{business.materialCall}.</p>
+
+        <div className={styles.ctas}>
+          <a
+            className={styles.ctaPrimary}
+            href={business.whatsapp[0].url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Pedir orçamento no WhatsApp
+          </a>
+          <a className={styles.ctaGhost} href="tel:+5511921218541">
+            {business.whatsapp[0].label}
+          </a>
+        </div>
+
+        <div className={styles.facts}>
+          {heroFacts.map((fact) => (
+            <span key={fact} className={styles.fact}>
+              {fact}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className={`${styles.grid} reveal`} ref={gridRef}>
         <div>
           <p className={`eyebrow ${styles.eyebrow}`}>Ficha técnica</p>
           <h2 className={`heading ${styles.title}`}>
