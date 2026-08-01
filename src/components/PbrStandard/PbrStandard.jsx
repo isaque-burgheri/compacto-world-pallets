@@ -1,14 +1,11 @@
 import { business, heroFacts, pbrSpec } from '../../data/business'
-import { useReveal } from '../../hooks/useReveal'
+import Reveal from '../Reveal/Reveal'
 import styles from './PbrStandard.module.css'
 
 export default function PbrStandard() {
-  const pitchRef = useReveal()
-  const gridRef = useReveal()
-
   return (
     <section id="padrao-pbr" className={`${styles.section} band`}>
-      <div className={`${styles.pitch} reveal`} ref={pitchRef}>
+      <Reveal as="div" className={styles.pitch}>
         <h1 className={`heading ${styles.pitchTitle}`}>
           Paletes PBR novos e sob medida,
           <br />
@@ -38,9 +35,9 @@ export default function PbrStandard() {
             </span>
           ))}
         </div>
-      </div>
+      </Reveal>
 
-      <div className={`${styles.grid} reveal`} ref={gridRef}>
+      <Reveal as="div" className={styles.grid} delay={150}>
         <div>
           <p className={`eyebrow ${styles.eyebrow}`}>Ficha técnica</p>
           <h2 className={`heading ${styles.title}`}>
@@ -74,7 +71,7 @@ export default function PbrStandard() {
             </div>
           ))}
         </div>
-      </div>
+      </Reveal>
     </section>
   )
 }

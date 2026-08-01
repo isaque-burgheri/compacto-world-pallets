@@ -1,13 +1,11 @@
 import { business } from '../../data/business'
-import { useReveal } from '../../hooks/useReveal'
+import Reveal from '../Reveal/Reveal'
 import styles from './Delivery.module.css'
 
 export default function Delivery() {
-  const revealRef = useReveal()
-
   return (
     <section id="entrega" className={`${styles.section} band`}>
-      <div className={`${styles.inner} reveal`} ref={revealRef}>
+      <Reveal as="div" className={styles.inner}>
         <div>
           <p className={`eyebrow ${styles.eyebrow}`}>Área de entrega</p>
           <h2 className={`heading ${styles.title}`}>
@@ -49,7 +47,7 @@ export default function Delivery() {
             allowFullScreen
           />
         </div>
-      </div>
+      </Reveal>
     </section>
   )
 }

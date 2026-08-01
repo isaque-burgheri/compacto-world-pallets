@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react'
 import { galleryPhotos, galleryVideos, galleryAssetUrl } from '../../data/gallery'
-import { useReveal } from '../../hooks/useReveal'
+import Reveal from '../Reveal/Reveal'
 import styles from './Gallery.module.css'
 
 export default function Gallery() {
-  const revealRef = useReveal()
   const [openIndex, setOpenIndex] = useState(null)
 
   useEffect(() => {
@@ -21,7 +20,7 @@ export default function Gallery() {
 
   return (
     <section id="galeria" className={`${styles.section} band`}>
-      <div className="reveal" ref={revealRef}>
+      <Reveal as="div">
         <p className={`eyebrow ${styles.eyebrow}`}>Galpão, produto e equipe</p>
         <h2 className={`heading ${styles.title}`}>Como é de perto</h2>
 
@@ -55,7 +54,7 @@ export default function Gallery() {
             />
           ))}
         </div>
-      </div>
+      </Reveal>
 
       {openPhoto && (
         <div

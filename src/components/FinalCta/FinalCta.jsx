@@ -1,14 +1,12 @@
 import { business } from '../../data/business'
-import { useReveal } from '../../hooks/useReveal'
+import Reveal from '../Reveal/Reveal'
 import QuoteForm from '../QuoteForm/QuoteForm'
 import styles from './FinalCta.module.css'
 
 export default function FinalCta() {
-  const revealRef = useReveal()
-
   return (
     <section id="orcamento" className={`${styles.section} band`}>
-      <div className={`${styles.inner} reveal`} ref={revealRef}>
+      <Reveal as="div" className={styles.inner}>
         <h2 className={`heading ${styles.title}`}>Diga quantos paletes você precisa</h2>
         <p className={styles.lede}>
           Preencha os dados abaixo e a gente monta a mensagem pra você, ou chame direto no WhatsApp com
@@ -26,7 +24,7 @@ export default function FinalCta() {
             </a>
           ))}
         </div>
-      </div>
+      </Reveal>
     </section>
   )
 }

@@ -1,14 +1,14 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useState } from 'react'
 
-export function useReveal() {
-  const ref = useRef(null)
+export function useReveal(ref, { threshold = 0.2 } = {}) {
+  const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
     const el = ref.current
     if (!el) return
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      el.classList.add('is-visible')
+      setIsVisible(true)
       return
     }
 
@@ -16,17 +16,17 @@ export function useReveal() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible')
+            setIsVisible(true)
             observer.unobserve(entry.target)
           }
         })
       },
-      { threshold: 0.15 }
+      { threshold }
     )
 
     observer.observe(el)
     return () => observer.disconnect()
-  }, [])
+  }, [ref, threshold])
 
-  return ref
+  return isVisible
 }

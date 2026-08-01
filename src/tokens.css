@@ -117,21 +117,3 @@ html.lenis body {
 .lenis.lenis-smooth iframe {
   pointer-events: none;
 }
-
-/* Reveal on scroll */
-.reveal {
-  opacity: 0;
-  transform: translateY(26px);
-  transition: opacity 700ms var(--ease-out-soft), transform 700ms var(--ease-out-soft);
-}
-.reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-@media (prefers-reduced-motion: reduce) {
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-}

@@ -110,6 +110,30 @@ resto do site (que é só foto real ou gráfico em código). Os dados de cada ca
 consulta" na carga porque não temos capacidade confirmada, mesmo a referência
 usada mostrando números fixos.
 
+## Reveal on scroll
+
+O efeito de entrada (opacidade 0 → 1, `translateY(24px)` → posição original) é
+feito com dois arquivos:
+
+- **[src/hooks/useReveal.js](src/hooks/useReveal.js)** — recebe um `ref` e
+  devolve `isVisible`. Cria um `IntersectionObserver` (`threshold` padrão 0.2),
+  chama `observer.unobserve()` assim que o elemento entra na tela (a animação
+  roda só uma vez) e faz o cleanup no `useEffect`. Se
+  `prefers-reduced-motion: reduce` estiver ativo, pula o observer e já entrega
+  `isVisible = true`.
+- **[src/components/Reveal/Reveal.jsx](src/components/Reveal/Reveal.jsx)** —
+  componente `<Reveal as="div" delay={100}>...</Reveal>` que usa o hook acima e
+  aplica `Reveal.module.css` (`.reveal` = estado inicial, `.visible` = estado
+  final). `delay` vira `transitionDelay` inline, usado pra escalonar cards
+  irmãos (100–150ms entre um e outro). `as` troca a tag renderizada
+  (`div`, `article`, etc.) sem perder a ref.
+
+Todas as seções da home usam `<Reveal>` no lugar do hook antigo; os 4
+compromissos e os 2 cards de produto têm stagger real (cada um com um delay
+maior que o anterior), o resto revela como bloco único. O CSS global antigo
+(`.reveal`/`.is-visible` em `tokens.css`) foi removido — o efeito inteiro agora
+vive dentro do componente `Reveal`.
+
 ## Sobre o mapa
 
 A seção "Entrega" (`#entrega`) embute um mapa do Google Maps via `<iframe>`
@@ -148,6 +172,7 @@ src/
   components/
     Header/                header fixo com nav e CTA
     ContactBar/             pílula de contato (maps, 2 WhatsApps, e-mail)
+    Reveal/                 wrapper de reveal on scroll (fade + translateY)
     Hero/                   banner da marca como fundo + H1, CTAs e fatos
     Divider/                motivo de tábuas entre seções
     PbrStandard/            texto + tabela de especificação

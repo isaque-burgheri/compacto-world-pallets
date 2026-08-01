@@ -1,5 +1,5 @@
 import { differentials } from '../../data/business'
-import { useReveal } from '../../hooks/useReveal'
+import Reveal from '../Reveal/Reveal'
 import styles from './Commitments.module.css'
 
 function HighlightedTitle({ title, highlight }) {
@@ -19,19 +19,17 @@ function HighlightedTitle({ title, highlight }) {
 }
 
 export default function Commitments() {
-  const revealRef = useReveal()
-
   return (
     <section id="compromissos" className={`${styles.section} band`}>
-      <div className={`${styles.grid} reveal`} ref={revealRef}>
-        {differentials.map((item) => (
-          <div key={item.label} className={styles.cell}>
+      <div className={styles.grid}>
+        {differentials.map((item, index) => (
+          <Reveal key={item.label} as="div" className={styles.cell} delay={index * 100}>
             <p className={`eyebrow ${styles.label}`}>{item.label}</p>
             <h3 className={`heading ${styles.title}`}>
               <HighlightedTitle title={item.title} highlight={item.highlight} />
             </h3>
             <p className={styles.text}>{item.text}</p>
-          </div>
+          </Reveal>
         ))}
       </div>
     </section>
