@@ -8,8 +8,6 @@ export default function Hero() {
   return (
     <section className={styles.hero}>
       <div className={`${styles.copy} reveal`} ref={revealRef}>
-        <p className={`eyebrow ${styles.eyebrow}`}>PBR-1 · 1,20 × 1,00 m · madeira de eucalipto</p>
-
         <h1 className={`heading ${styles.title}`}>
           Paletes PBR novos e sob medida,
           <br />

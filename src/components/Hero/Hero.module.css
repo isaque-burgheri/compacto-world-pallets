@@ -16,10 +16,6 @@
   order: 2;
 }
 
-.eyebrow {
-  color: var(--pine);
-}
-
 .title {
   font-size: var(--h1-size);
   color: var(--bone);
