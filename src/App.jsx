@@ -6,6 +6,7 @@ import Header from './components/Header/Header'
 import Hero from './components/Hero/Hero'
 import Divider from './components/Divider/Divider'
 import PbrStandard from './components/PbrStandard/PbrStandard'
+import ProductCards from './components/ProductCards/ProductCards'
 import Commitments from './components/Commitments/Commitments'
 import Gallery from './components/Gallery/Gallery'
 import Delivery from './components/Delivery/Delivery'
@@ -40,6 +41,7 @@ export default function App() {
         <Hero />
         <Divider />
         <PbrStandard />
+        <ProductCards />
         <Divider />
         <Commitments />
         <Divider />

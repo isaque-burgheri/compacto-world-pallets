@@ -14,6 +14,7 @@ export default function Footer() {
         </div>
 
         <nav className={styles.column} aria-label="Navegação">
+          <p className={`eyebrow ${styles.columnTitle}`}>Navegação</p>
           <a href="#padrao-pbr">O padrão PBR</a>
           <a href="#compromissos">Compromissos</a>
           <a href="#galeria">Galeria</a>
@@ -21,7 +22,14 @@ export default function Footer() {
           <a href="#orcamento">Orçamento</a>
         </nav>
 
+        <nav className={styles.column} aria-label="Produtos">
+          <p className={`eyebrow ${styles.columnTitle}`}>Produtos</p>
+          <a href="#padrao-pbr">Paletes PBR novos</a>
+          <a href="#padrao-pbr">Paletes sob medida</a>
+        </nav>
+
         <nav className={styles.column} aria-label="Contato">
+          <p className={`eyebrow ${styles.columnTitle}`}>Contato</p>
           {business.whatsapp.map((wa) => (
             <a key={wa.label} href={wa.url} target="_blank" rel="noopener noreferrer">
               {wa.label}

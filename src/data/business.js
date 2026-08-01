@@ -1,5 +1,8 @@
 const WHATSAPP_MESSAGE = 'Olá! Preciso de um orçamento de paletes PBR novos.'
-const encodedMessage = encodeURIComponent(WHATSAPP_MESSAGE)
+
+export function buildWhatsAppUrl(number, message) {
+  return `https://wa.me/${number}?text=${encodeURIComponent(message)}`
+}
 
 export const business = {
   name: 'Compacto World Pallets',
@@ -10,12 +13,14 @@ export const business = {
   deliveryArea: 'São Paulo e região',
   whatsapp: [
     {
+      number: '5511921218541',
       label: '(11) 92121-8541',
-      url: `https://wa.me/5511921218541?text=${encodedMessage}`
+      url: buildWhatsAppUrl('5511921218541', WHATSAPP_MESSAGE)
     },
     {
+      number: '5511991023133',
       label: '(11) 99102-3133',
-      url: `https://wa.me/5511991023133?text=${encodedMessage}`
+      url: buildWhatsAppUrl('5511991023133', WHATSAPP_MESSAGE)
     }
   ]
 }
@@ -51,7 +56,7 @@ export const pbrSpec = [
   { label: 'MEDIDAS', value: '1200 × 1000 mm' },
   { label: 'FACES', value: 'Dupla face' },
   { label: 'ENTRADAS', value: '4 entradas para empilhadeira' },
-  { label: 'MADEIRA', value: 'Pinus' },
+  { label: 'MADEIRA', value: 'Eucalipto' },
   { label: 'CONDIÇÃO', value: 'Novo' },
   { label: 'CAPACIDADE DE CARGA', value: 'Sob consulta' },
   { label: 'ENTREGA', value: 'São Paulo e região' }

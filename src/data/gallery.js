@@ -55,7 +55,7 @@ export const galleryPhotos = [
   },
   {
     file: 'produto-pilha-04.jpg',
-    alt: 'Detalhe de pilha de paletes PBR novos, madeira de pinus à mostra'
+    alt: 'Detalhe de pilha de paletes PBR novos, madeira de eucalipto à mostra'
   },
   {
     file: 'produto-pilha-05.jpg',

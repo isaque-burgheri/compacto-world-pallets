@@ -53,6 +53,27 @@ CTAs) ficam no JSX de cada seção, dentro de `src/components/<Nome>/<Nome>.jsx`
   transparência. Se for trocar por outra imagem, repita esse tratamento
   (recorte + fade nas bordas) pra manter a mesma integração visual.
 
+## Sobre as fotos da seção "Nossos paletes"
+
+As duas imagens em **[public/media/products/](public/media/products/)**
+(`pallet-pbr-stock.webp` e `pallet-grid-stock.webp`) são fotos de estoque, não
+fotos reais da Compacto — diferente de tudo que está em `public/media/gallery/`.
+Foram usadas a pedido explícito do cliente, mesmo isso não sendo o padrão do
+resto do site (que é só foto real ou gráfico em código). Os dados de cada card
+(medida, carga, material) ficam em `src/data/products.js` — mantive "sob
+consulta" na carga porque não temos capacidade confirmada, mesmo a referência
+usada mostrando números fixos.
+
+## Sobre o formulário de orçamento
+
+A seção final (`#orcamento`) tem um formulário (Nome, Empresa, Quantidade,
+Observações) em **[src/components/QuoteForm/QuoteForm.jsx](src/components/QuoteForm/QuoteForm.jsx)**.
+Ele **não envia dado nenhum pra lugar algum** — não há backend nem serviço de
+e-mail. Ao clicar em "Montar mensagem e abrir WhatsApp", o próprio navegador
+monta um texto com o que foi preenchido e abre o link `wa.me` de sempre, igual
+aos outros botões de WhatsApp do site. Os botões diretos continuam logo abaixo
+do formulário, para quem preferir não preencher nada.
+
 ## Onde ficam os tokens de cor
 
 - **[src/tokens.css](src/tokens.css)** — todas as cores (`--ink`, `--navy`,
@@ -66,6 +87,7 @@ CTAs) ficam no JSX de cada seção, dentro de `src/components/<Nome>/<Nome>.jsx`
 ```
 public/media/gallery/    fotos e vídeos reais exibidos na Galeria
 public/media/brand/      emblema de marca usado no hero
+public/media/products/   fotos de estoque usadas nos cards de produto
 src/
   tokens.css              tokens globais + reset
   data/business.js        fonte única dos dados do negócio
@@ -75,9 +97,11 @@ src/
     Hero/                   H1, CTAs, emblema de marca (imagem)
     Divider/                motivo de tábuas entre seções
     PbrStandard/            texto + tabela de especificação
+    ProductCards/           cards "Palete PBR" e "Palete Sob Medida" (fotos de estoque)
     Commitments/            grade 2x2 dos 4 compromissos
     Gallery/                fotos e vídeos reais do galpão, produto e equipe
     Delivery/               endereço + WhatsApps
-    FinalCta/               CTA final em --gold
+    FinalCta/               CTA final em --gold, com o QuoteForm
+    QuoteForm/              formulário que monta a mensagem e abre o WhatsApp
     Footer/                 rodapé
 ```
