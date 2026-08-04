@@ -45,7 +45,12 @@
 }
 
 .pitchVideoCol {
+  position: relative;
   display: flex;
+  border: 1px solid rgba(6, 22, 46, 0.15);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--ink);
 }
 
 .pitchVideo {
@@ -54,9 +59,21 @@
   aspect-ratio: 16 / 9;
   object-fit: cover;
   display: block;
-  border: 1px solid rgba(6, 22, 46, 0.15);
-  border-radius: 4px;
-  background: var(--ink);
+}
+
+/* Degradê por cima do vídeo — suaviza a diferença entre o cinza de fundo do
+   vídeo e o --bone da página, esmaecendo mais forte perto da borda da caixa
+   e ficando transparente no centro (não cobre o conteúdo do vídeo). */
+.pitchVideoOverlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    100% 100% at 50% 50%,
+    transparent 35%,
+    rgba(231, 232, 226, 0.28) 78%,
+    rgba(231, 232, 226, 0.55) 100%
+  );
 }
 
 .pitch {

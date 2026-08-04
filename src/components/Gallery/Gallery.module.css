@@ -16,15 +16,71 @@
   max-width: 20ch;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 3px;
+/* --- Carrossel (compartilhado por fotos e vídeos) --- */
+.carousel {
+  position: relative;
 }
 
-.tile {
-  position: relative;
-  aspect-ratio: 4 / 3;
+.track {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(231, 232, 226, 0.25);
+  background: rgba(6, 22, 46, 0.8);
+  color: var(--bone);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 200ms ease, color 200ms ease, opacity 200ms ease;
+}
+
+.arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+.arrow:hover:not(:disabled) {
+  border-color: var(--gold-lit);
+  color: var(--gold-lit);
+}
+
+.arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.arrow[data-side='prev'] {
+  left: 8px;
+}
+
+.arrow[data-side='next'] {
+  right: 8px;
+}
+
+/* --- Fotos: ~4 visíveis por vez --- */
+.photoItem {
+  scroll-snap-align: start;
+  flex: 0 0 calc((100% - 3 * 12px) / 4);
+  min-width: 0;
+  aspect-ratio: 3 / 4;
   overflow: hidden;
   border: 0;
   padding: 0;
@@ -32,7 +88,7 @@
   background: var(--navy);
 }
 
-.tile img {
+.photoItem img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -41,32 +97,13 @@
   filter: grayscale(15%);
 }
 
-.tile:hover img,
-.tile:focus-visible img {
+.photoItem:hover img,
+.photoItem:focus-visible img {
   transform: scale(1.05);
   filter: grayscale(0%);
 }
 
-.tag {
-  position: absolute;
-  bottom: 8px;
-  left: 8px;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  color: var(--gold-lit);
-  background: rgba(6, 22, 46, 0.75);
-  padding: 3px 7px;
-  opacity: 0;
-  transition: opacity 200ms ease;
-}
-
-.tile:hover .tag,
-.tile:focus-visible .tag {
-  opacity: 1;
-}
-
+/* --- Vídeos: segunda linha, mesma mecânica de carrossel --- */
 .videoHeading {
   font-family: var(--font-mono);
   font-weight: 600;
@@ -74,21 +111,29 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--pine);
-  margin: 56px 0 20px;
+  margin: 40px 0 20px;
 }
 
-.videoGrid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.videoGrid video {
-  width: 100%;
-  aspect-ratio: 9 / 16;
-  object-fit: cover;
-  background: var(--navy);
+/* Largura fixa (não só altura) pra caber vídeo retrato e paisagem com espaço
+   de sobra — com largura curta o navegador esconde o botão de tela cheia dos
+   controles nativos. */
+.videoItem {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  width: 420px;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid rgba(231, 232, 226, 0.15);
+  background: var(--navy);
+}
+
+.videoItem video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 /* Lightbox */
@@ -130,21 +175,33 @@
 }
 
 @media (max-width: 900px) {
-  .grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .photoItem {
+    flex-basis: calc((100% - 12px) / 2.15);
   }
 
-  .videoGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .videoItem {
+    width: 320px;
+    height: 320px;
   }
 }
 
 @media (max-width: 560px) {
-  .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .photoItem {
+    flex-basis: 82%;
   }
 
-  .videoGrid {
-    grid-template-columns: 1fr;
+  .videoItem {
+    width: 270px;
+    height: 270px;
+  }
+
+  .arrow {
+    width: 36px;
+    height: 36px;
+  }
+
+  .arrow svg {
+    width: 16px;
+    height: 16px;
   }
 }

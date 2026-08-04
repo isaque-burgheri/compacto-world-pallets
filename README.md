@@ -33,14 +33,31 @@ CTAs) ficam no JSX de cada seção, dentro de `src/components/<Nome>/<Nome>.jsx`
 
 ## Onde trocar as fotos e vídeos da galeria
 
-- **[src/data/gallery.js](src/data/gallery.js)** — lista os arquivos e o texto
-  alternativo (alt) de cada foto/vídeo exibido na seção "Como é de perto".
-- Os arquivos em si ficam em **[public/media/gallery/](public/media/gallery/)**.
+A seção "Como é de perto" (`src/components/Gallery/Gallery.jsx`) é um
+carrossel horizontal — fotos numa linha, vídeos em outra — com setas de
+avançar/voltar dos dois lados (`CarouselRow`, componente interno do próprio
+arquivo). Cada linha rola por `scrollBy` de ~86% da largura visível por clique,
+com scroll-snap nativo; as setas ficam desabilitadas sozinhas no início/fim.
+
+- **[src/data/gallery.js](src/data/gallery.js)** — lista os arquivos, o texto
+  alternativo (alt) de cada foto/vídeo e o poster de cada vídeo.
+- Os arquivos ficam em **[public/media/gallery/](public/media/gallery/)**.
   Para trocar uma foto ou vídeo, substitua o arquivo mantendo o mesmo nome, ou
   adicione um novo arquivo e uma entrada correspondente em `gallery.js`.
-- Os vídeos usam `preload="metadata"` (sem autoplay) de propósito: eles só
-  baixam o vídeo inteiro quando o visitante aperta play, para não pesar o
-  carregamento no celular.
+- **Os vídeos usam `preload="none"` + `poster`** (miniatura estática, em
+  `public/media/gallery/posters/`, gerada com `ffmpeg` a partir do próprio
+  vídeo). Isso é o que resolve a galeria não carregar no celular: com 9 vídeos
+  na página, mesmo só metadados (`preload="metadata"`) já é pesado demais pra
+  muitos navegadores mobile inicializarem de uma vez — com `preload="none"`
+  nada é buscado/decodificado até o visitante apertar o play de um vídeo
+  específico.
+
+Se adicionar um vídeo novo, gere o poster dele com:
+
+```bash
+ffmpeg -i public/media/gallery/video-XX.mp4 -ss 00:00:00.5 -vframes 1 \
+  -vf "scale=480:-2" -q:v 4 public/media/gallery/posters/video-XX.jpg
+```
 
 ## O banner do topo e a escrita principal
 
@@ -131,18 +148,29 @@ seção fica "travada" na tela enquanto ele não termina.
   `narrowBreakpoint` em `useScrollScrub`.
 - O vídeo é sempre mudo e sem controles (`muted`, sem `controls`), só decorativo
   (`aria-hidden`).
+- **`.pitchVideoOverlay`** — degradê radial por cima do vídeo (transparente no
+  centro, esmaecendo pra `--bone` perto da borda da caixa). O fundo do vídeo é
+  um cinza neutro visivelmente mais escuro que o `--bone` da página; esse
+  degradê suaviza esse corte em vez de deixar a borda da caixa seca.
 
 ### Sobre o arquivo de vídeo
 
-O vídeo enviado (`Downloads/pallett.mp4`, 1920×1080, 30fps, 16,7 MB) tinha
-só **2 keyframes em 201 frames** — nesse formato, buscar um frame arbitrário
-(o que o scroll-scrub faz o tempo todo) trava, porque o navegador precisa
+O vídeo em uso é
+**[public/media/video/pitch-scroll2.mp4](public/media/video/pitch-scroll2.mp4)**
+(1,9 MB, 960px de largura, 10s, 240 frames). Como todo vídeo usado no
+scroll-scrub, ele passou pelo mesmo tratamento: o arquivo bruto tinha só
+**1 keyframe em 240 frames** — nesse formato, buscar um frame arbitrário (o
+que o scroll-scrub faz o tempo todo) trava, porque o navegador precisa
 decodificar a partir do keyframe anterior a cada busca. Reencodei com ffmpeg
 pra **cada frame ser um keyframe** (`-g 1 -keyint_min 1 -sc_threshold 0`),
-reduzindo também a resolução (960×540) e removendo o áudio (o vídeo é mudo).
-Resultado: **[public/media/video/pitch-scroll.mp4](public/media/video/pitch-scroll.mp4)**,
-1,4 MB, busca instantânea em qualquer frame — confirmei com `ffprobe` que os
-201 frames do arquivo final são todos keyframes.
+reduzindo também a resolução (960px de largura) e removendo o áudio (o vídeo é
+mudo). Confirmei com `ffprobe` que os 240 frames do arquivo final são todos
+keyframes.
+
+O arquivo bruto, como recebido, está preservado em
+`public/media/video/pitch-scroll2-original.mp4`. O vídeo usado antes deste
+segue em `public/media/video/pitch-scroll.mp4`, sem uso no código — mantido
+só pra facilitar voltar atrás caso necessário.
 
 Se for trocar o vídeo, reencode com o mesmo comando (ajustando duração/
 resolução conforme o novo arquivo):
@@ -152,7 +180,7 @@ ffmpeg -i entrada.mp4 -an -vf "scale=960:-2" \
   -c:v libx264 -profile:v high -pix_fmt yuv420p \
   -g 1 -keyint_min 1 -sc_threshold 0 \
   -crf 28 -preset slow -movflags +faststart \
-  public/media/video/pitch-scroll.mp4
+  public/media/video/pitch-scroll2.mp4
 ```
 
 ## Reveal on scroll

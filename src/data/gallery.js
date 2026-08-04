@@ -67,10 +67,14 @@ export const galleryPhotos = [
   }
 ]
 
-export const galleryVideos = Array.from({ length: 9 }, (_, i) => ({
-  file: `video-${String(i + 1).padStart(2, '0')}.mp4`,
-  label: `Vídeo ${i + 1}`
-}))
+export const galleryVideos = Array.from({ length: 9 }, (_, i) => {
+  const n = String(i + 1).padStart(2, '0')
+  return {
+    file: `video-${n}.mp4`,
+    poster: `posters/video-${n}.jpg`,
+    label: `Vídeo ${i + 1}`
+  }
+})
 
 export function galleryAssetUrl(file) {
   return `${BASE}/${file}`

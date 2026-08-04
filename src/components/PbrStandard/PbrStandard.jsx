@@ -60,7 +60,7 @@ export default function PbrStandard() {
             <video
               ref={videoRef}
               className={styles.pitchVideo}
-              src="/media/video/pitch-scroll.mp4"
+              src="/media/video/pitch-scroll2.mp4"
               muted
               playsInline
               preload="auto"
@@ -69,6 +69,7 @@ export default function PbrStandard() {
               aria-hidden="true"
               tabIndex={-1}
             />
+            <div className={styles.pitchVideoOverlay} aria-hidden="true" />
           </div>
         </div>
       </div>
