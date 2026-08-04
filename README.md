@@ -148,10 +148,17 @@ seção fica "travada" na tela enquanto ele não termina.
   `narrowBreakpoint` em `useScrollScrub`.
 - O vídeo é sempre mudo e sem controles (`muted`, sem `controls`), só decorativo
   (`aria-hidden`).
-- **`.pitchVideoOverlay`** — degradê radial por cima do vídeo (transparente no
-  centro, esmaecendo pra `--bone` perto da borda da caixa). O fundo do vídeo é
-  um cinza neutro visivelmente mais escuro que o `--bone` da página; esse
-  degradê suaviza esse corte em vez de deixar a borda da caixa seca.
+- **Sem moldura**: `.pitchVideoCol` não tem borda nem cantos arredondados —
+  uma caixa com contorno visível reforça a sensação de "vídeo colado", então
+  só o degradê define onde ele termina.
+- **`.pitchVideo` tem `filter: brightness(1.14) saturate(0.9)`** — clareia um
+  pouco o cinza de fundo do vídeo antes mesmo do degradê entrar (aproxima do
+  tom do `--bone`, mas não faz o vídeo ficar branco puro — isso o navegador
+  não faz sem recodificar o arquivo).
+- **`.pitchVideoOverlay`** — degradê radial forte por cima do vídeo:
+  transparente no centro (não mexe no conteúdo), esmaecendo até virar `--bone`
+  **sólido** bem antes da borda da caixa — o vídeo se dissolve no fundo da
+  página em vez de terminar num corte seco.
 
 ### Sobre o arquivo de vídeo
 

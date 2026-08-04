@@ -44,13 +44,13 @@
   gap: clamp(32px, 6vw, 64px);
 }
 
+/* Sem borda nem cantos — é a moldura em si que faz o vídeo parecer uma caixa
+   colada na página. Sem ela, só sobra o degradê pra fazer a transição. */
 .pitchVideoCol {
   position: relative;
   display: flex;
-  border: 1px solid rgba(6, 22, 46, 0.15);
-  border-radius: 4px;
   overflow: hidden;
-  background: var(--ink);
+  background: var(--bone);
 }
 
 .pitchVideo {
@@ -59,20 +59,25 @@
   aspect-ratio: 16 / 9;
   object-fit: cover;
   display: block;
+  /* Clareia o cinza de fundo do vídeo, aproximando do tom do --bone antes
+     mesmo do degradê entrar (o vídeo em si nunca vai ficar branco puro, mas
+     isso reduz a diferença de base). */
+  filter: brightness(1.14) saturate(0.9);
 }
 
-/* Degradê por cima do vídeo — suaviza a diferença entre o cinza de fundo do
-   vídeo e o --bone da página, esmaecendo mais forte perto da borda da caixa
-   e ficando transparente no centro (não cobre o conteúdo do vídeo). */
+/* Degradê forte por cima do vídeo: transparente no centro (não mexe no
+   conteúdo), esmaecendo até virar --bone sólido bem antes da borda da caixa —
+   o vídeo se dissolve no fundo da página em vez de terminar num corte seco. */
 .pitchVideoOverlay {
   position: absolute;
   inset: 0;
   pointer-events: none;
   background: radial-gradient(
-    100% 100% at 50% 50%,
-    transparent 35%,
-    rgba(231, 232, 226, 0.28) 78%,
-    rgba(231, 232, 226, 0.55) 100%
+    120% 120% at 50% 50%,
+    transparent 28%,
+    rgba(231, 232, 226, 0.32) 52%,
+    rgba(231, 232, 226, 0.72) 74%,
+    var(--bone) 96%
   );
 }
 
