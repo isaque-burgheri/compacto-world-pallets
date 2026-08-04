@@ -62,8 +62,24 @@ ffmpeg -i public/media/gallery/video-XX.mp4 -ss 00:00:00.5 -vframes 1 \
 ## O banner do topo e a escrita principal
 
 O topo da página (`src/components/Hero/Hero.jsx`) é **só a arte oficial da
-Compacto**, sem texto por cima:
-**[public/media/brand/hero-banner.webp](public/media/brand/hero-banner.webp)**.
+Compacto**, sem texto por cima.
+
+### ⚠️ Duas versões em avaliação pelo cliente (temporário)
+
+Hoje o Hero mostra **duas versões do banner**, com um botão pra alternar entre
+elas ("Opção 1 · com fundo" / "Opção 2 · sem fundo", canto superior direito da
+arte):
+
+| Opção | Arquivo | O que é |
+| --- | --- | --- |
+| 1 (padrão) | `public/media/brand/hero-banner-a.webp` | globo + pátio de armazém com colaboradores e caminhão ao fundo |
+| 2 | `public/media/brand/hero-banner-b.webp` | globo sobre fundo de céu, sem cenário |
+
+Isso é **provisório** — assim que o cliente decidir qual prefere, edite
+`src/components/Hero/Hero.jsx`: apague o array `BANNER_OPTIONS`, o `useState`
+e o `<button className={styles.bannerSwitch}>`, e deixe o `<img>` com o `src`
+fixo na opção escolhida (o comentário no topo do arquivo já explica isso).
+Pode apagar o arquivo `.webp` da opção descartada também.
 
 Toda a escrita — H1, lede, os dois CTAs e a faixa de fatos — vive no começo da
 seção seguinte (`src/components/PbrStandard/PbrStandard.jsx`, bloco `.pitch`),
@@ -102,13 +118,23 @@ empilhados.
 
 ### Texto corrigido dentro da imagem
 
-As artes recebidas vinham com as descrições dos diferenciais escritas errado
+Toda arte recebida até agora (incluindo as duas opções acima) veio com as
+descrições dos diferenciais escritas errado — cada uma com erros diferentes
 (ex.: *"Produtas navas e do sho peorho."*, *"de alto padrád."*,
-*"resistencia"*). As linhas erradas foram apagadas e reescritas corretas sobre o
-mesmo fundo, na mesma posição e com fonte equivalente (Segoe UI Semibold). O
-arquivo como recebido está preservado em
-`public/media/brand/hero-banner-original.webp` — se chegar uma versão nova e
-já correta da arte, basta substituir `hero-banner.webp`.
+*"resistencia"*, *"durabaidade"*, *"escelência"*). As linhas erradas foram
+apagadas e reescritas corretas sobre o mesmo fundo, na mesma posição e com
+fonte equivalente (Segoe UI Semibold). Vale conferir com atenção se chegar uma
+arte nova — esse tipo de erro se repetiu em toda geração até aqui.
+
+O arquivo original da primeira arte, como recebido (com o erro), está
+preservado em `public/media/brand/hero-banner-original.webp`. Os dois `.png`
+em `public/media/brand/alternativas/` (origem das opções 1 e 2) foram
+corrigidos diretamente no arquivo, sem guardar uma cópia bruta separada —
+foram usados só como fonte pra gerar os `.webp` finais.
+
+`public/media/brand/hero-banner.webp` (o banner único de antes das duas
+opções) não é mais referenciado em lugar nenhum do código — pode apagar depois
+que a decisão entre as opções 1/2 estiver fechada.
 
 > Nota: a arte escreve "PALETS" no título, enquanto o material oficial da
 > empresa usa "paletes". Isso veio assim da arte e **não** foi alterado.
