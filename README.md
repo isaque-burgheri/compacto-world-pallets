@@ -64,22 +64,29 @@ ffmpeg -i public/media/gallery/video-XX.mp4 -ss 00:00:00.5 -vframes 1 \
 O topo da página (`src/components/Hero/Hero.jsx`) é **só a arte oficial da
 Compacto**, sem texto por cima.
 
-### ⚠️ Duas versões em avaliação pelo cliente (temporário)
+### ⚠️ Três versões em avaliação pelo cliente (temporário)
 
-Hoje o Hero mostra **duas versões do banner**, com um botão pra alternar entre
-elas ("Opção 1 · com fundo" / "Opção 2 · sem fundo", canto superior direito da
-arte):
+Hoje o Hero mostra **três versões do banner**, com um botão que cicla entre
+elas em sequência ("Opção 1 · esquerda" → "Opção 2 · com fundo" → "Opção 3 ·
+sem fundo" → volta pra 1, canto superior direito da arte):
 
 | Opção | Arquivo | O que é |
 | --- | --- | --- |
-| 1 (padrão) | `public/media/brand/hero-banner-a.webp` | globo + pátio de armazém com colaboradores e caminhão ao fundo |
-| 2 | `public/media/brand/hero-banner-b.webp` | globo sobre fundo de céu, sem cenário |
+| 1 (padrão) | `public/media/brand/hero-banner-c.webp` | globo alinhado à esquerda, sobre fundo de céu |
+| 2 | `public/media/brand/hero-banner-a.webp` | globo centralizado + pátio de armazém com colaboradores e caminhão ao fundo |
+| 3 | `public/media/brand/hero-banner-b.webp` | globo centralizado, sobre fundo de céu, sem cenário |
 
 Isso é **provisório** — assim que o cliente decidir qual prefere, edite
 `src/components/Hero/Hero.jsx`: apague o array `BANNER_OPTIONS`, o `useState`
 e o `<button className={styles.bannerSwitch}>`, e deixe o `<img>` com o `src`
 fixo na opção escolhida (o comentário no topo do arquivo já explica isso).
-Pode apagar o arquivo `.webp` da opção descartada também.
+Pode apagar os arquivos `.webp` das opções descartadas também.
+
+As três artes (`public/media/brand/alternativas/*.png`) vieram com os mesmos
+erros de digitação recorrentes desse tipo de geração (ex.: "resistencia" sem
+acento, "padrâd"/"padrád" em vez de "padrão") — cada uma foi corrigida com o
+mesmo processo de apagar e redesenhar o texto por cima do próprio fundo antes
+de virar `.webp`.
 
 Toda a escrita — H1, lede, os dois CTAs e a faixa de fatos — vive no começo da
 seção seguinte (`src/components/PbrStandard/PbrStandard.jsx`, bloco `.pitch`),

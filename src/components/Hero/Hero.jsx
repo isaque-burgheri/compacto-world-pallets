@@ -2,19 +2,24 @@ import { useState } from 'react'
 import ContactBar from '../ContactBar/ContactBar'
 import styles from './Hero.module.css'
 
-// CONFIRMAR COM O CLIENTE: duas versões do banner em avaliação. Assim que o
+// CONFIRMAR COM O CLIENTE: três versões do banner em avaliação. Assim que o
 // cliente decidir, troque o <img> abaixo pra usar só o src escolhido e
 // remova BANNER_OPTIONS, o useState e o botão de alternar.
 const BANNER_OPTIONS = [
   {
+    src: '/media/brand/hero-banner-c.webp',
+    label: 'Opção 1 · esquerda',
+    alt: 'Arte da Compacto World Pallets: globo cercado de paletes, caminhões e guindastes, alinhado à esquerda, sobre fundo de céu'
+  },
+  {
     src: '/media/brand/hero-banner-a.webp',
-    label: 'Opção 1 · com fundo',
+    label: 'Opção 2 · com fundo',
     alt: 'Arte da Compacto World Pallets: globo cercado de paletes, caminhões e guindastes, com pátio de armazém, colaboradores e caminhão de entrega ao fundo'
   },
   {
     src: '/media/brand/hero-banner-b.webp',
-    label: 'Opção 2 · sem fundo',
-    alt: 'Arte da Compacto World Pallets: globo cercado de paletes, caminhões e guindastes, sobre fundo de céu'
+    label: 'Opção 3 · sem fundo',
+    alt: 'Arte da Compacto World Pallets: globo cercado de paletes, caminhões e guindastes, centralizado, sobre fundo de céu'
   }
 ]
 
@@ -37,12 +42,12 @@ export default function Hero() {
         fetchpriority="high"
       />
 
-      {/* Alternador temporário pro cliente comparar as duas versões do banner. */}
+      {/* Alternador temporário pro cliente comparar as versões do banner. */}
       <button
         type="button"
         className={styles.bannerSwitch}
         onClick={toggleOption}
-        aria-label="Ver a outra versão do banner"
+        aria-label="Ver a próxima versão do banner"
       >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
           <path d="M17 2l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
