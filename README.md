@@ -113,11 +113,7 @@ são SVG inline. Cada item é clicável:
 | Endereço | Google Maps (`business.mapsUrl`, gerado a partir de `business.address`) |
 | (11) 92121-8541 | WhatsApp 1, com a mensagem pré-preenchida |
 | (11) 99102-3133 | WhatsApp 2, com a mensagem pré-preenchida |
-| Entre em contato | `mailto:` de `business.email` |
-
-> **⚠️ O e-mail é um placeholder.** `business.email` está como
-> `contato@exemplo.com.br` em [src/data/business.js](src/data/business.js).
-> Trocar pelo e-mail real antes de publicar.
+| Entre em contato | `mailto:` de `business.email` (`compactoworlddcs@gmail.com`) |
 
 Acima de 1000px a pílula é posicionada sobre a faixa azul da arte; abaixo disso
 ela sai de cima da imagem e vira um bloco logo abaixo dela, com os três grupos

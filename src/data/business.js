@@ -14,8 +14,7 @@ export const business = {
   // Endereço quebrado em 2 linhas para a barra de contato
   addressLines: ['Av. Adriano Bertozzi, 563', 'São Paulo - SP'],
   mapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS)}`,
-  // CONFIRMAR: e-mail real da Compacto. Este é um placeholder de teste.
-  email: 'contato@exemplo.com.br',
+  email: 'compactoworlddcs@gmail.com',
   deliveryArea: 'São Paulo e região',
   whatsapp: [
     {
