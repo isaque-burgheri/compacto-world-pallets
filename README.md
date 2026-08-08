@@ -284,7 +284,6 @@ src/
   data/business.js        fonte única dos dados do negócio
   hooks/useReveal.js       reveal on scroll (IntersectionObserver)
   components/
-    Header/                header fixo com nav e CTA
     ContactBar/             pílula de contato (maps, 2 WhatsApps, e-mail)
     Reveal/                 wrapper de reveal on scroll (fade + translateY)
     Hero/                   banner da marca como fundo + H1, CTAs e fatos

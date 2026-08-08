@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import Lenis from 'lenis'
 import 'lenis/dist/lenis.css'
 
-import Header from './components/Header/Header'
 import Hero from './components/Hero/Hero'
 import Divider from './components/Divider/Divider'
 import PbrStandard from './components/PbrStandard/PbrStandard'
@@ -36,7 +35,6 @@ export default function App() {
 
   return (
     <>
-      <Header />
       <main>
         <Hero />
         <Divider />

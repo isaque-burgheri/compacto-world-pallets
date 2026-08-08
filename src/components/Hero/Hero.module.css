@@ -3,7 +3,6 @@
    mesmo lugar onde ela aparecia desenhada nas versões anteriores. */
 .hero {
   position: relative;
-  margin-top: 66px; /* altura do header fixo */
   background: var(--bone);
   line-height: 0; /* elimina o espaço extra abaixo da imagem inline */
 }

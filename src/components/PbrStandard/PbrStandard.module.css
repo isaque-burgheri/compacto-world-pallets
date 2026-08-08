@@ -23,12 +23,12 @@
   border-bottom: 1px solid rgba(6, 22, 46, 0.15);
 }
 
-/* Gruda logo abaixo do header fixo (66px) enquanto dura o percurso de scroll
-   do .pitchScrub — isso é o que "trava" a seção na tela. */
+/* Gruda no topo da tela enquanto dura o percurso de scroll do .pitchScrub —
+   isso é o que "trava" a seção na tela. */
 .pitchScrub .pitchSticky {
   position: sticky;
-  top: 66px;
-  height: calc(100vh - 66px);
+  top: 0;
+  height: 100vh;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: center;
