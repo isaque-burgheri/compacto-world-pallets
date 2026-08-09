@@ -13,50 +13,6 @@
   height: auto;
 }
 
-/* Alternador temporário (ver comentário em Hero.jsx) — some assim que o
-   cliente decidir qual versão do banner fica. */
-.bannerSwitch {
-  position: absolute;
-  top: 16px;
-  right: var(--gutter);
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(6, 22, 46, 0.82);
-  border: 1px solid rgba(242, 179, 7, 0.55);
-  color: var(--bone);
-  font-family: var(--font-mono);
-  font-weight: 600;
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 9px 14px;
-  border-radius: 999px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: border-color 200ms ease, color 200ms ease;
-}
-
-.bannerSwitch svg {
-  width: 15px;
-  height: 15px;
-  flex: none;
-}
-
-.bannerSwitch:hover {
-  border-color: var(--gold-lit);
-  color: var(--gold-lit);
-}
-
-@media (max-width: 560px) {
-  .bannerSwitch span,
-  .bannerSwitch {
-    font-size: 10px;
-    padding: 7px 11px;
-  }
-}
-
 /* A faixa azul da arte vai de 82,7% a 90,3% da altura. A pílula é mais alta que
    a faixa, então fica ancorada um pouco abaixo dela: assim não encobre a última
    linha do painel de diferenciais da arte e só encosta na margem em branco da

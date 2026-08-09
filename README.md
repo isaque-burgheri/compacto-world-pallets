@@ -64,23 +64,17 @@ ffmpeg -i public/media/gallery/video-XX.mp4 -ss 00:00:00.5 -vframes 1 \
 O topo da página (`src/components/Hero/Hero.jsx`) é **só a arte oficial da
 Compacto**, sem texto por cima.
 
-### ⚠️ Três versões em avaliação pelo cliente (temporário)
+### Banner definido
 
-Hoje o Hero mostra **três versões do banner**, com um botão que cicla entre
-elas em sequência ("Opção 1 · esquerda" → "Opção 2 · com fundo" → "Opção 3 ·
-sem fundo" → volta pra 1, canto superior direito da arte):
+O cliente avaliou três versões do banner e fechou na opção "sem fundo":
+`public/media/brand/hero-banner-b.webp` (globo centralizado, sobre fundo de
+céu, sem cenário). O alternador temporário (`BANNER_OPTIONS`, `useState` e
+botão de troca) foi removido de `src/components/Hero/Hero.jsx` — o `<img>`
+usa `hero-banner-b.webp` fixo.
 
-| Opção | Arquivo | O que é |
-| --- | --- | --- |
-| 1 (padrão) | `public/media/brand/hero-banner-c.webp` | globo alinhado à esquerda, sobre fundo de céu |
-| 2 | `public/media/brand/hero-banner-a.webp` | globo centralizado + pátio de armazém com colaboradores e caminhão ao fundo |
-| 3 | `public/media/brand/hero-banner-b.webp` | globo centralizado, sobre fundo de céu, sem cenário |
-
-Isso é **provisório** — assim que o cliente decidir qual prefere, edite
-`src/components/Hero/Hero.jsx`: apague o array `BANNER_OPTIONS`, o `useState`
-e o `<button className={styles.bannerSwitch}>`, e deixe o `<img>` com o `src`
-fixo na opção escolhida (o comentário no topo do arquivo já explica isso).
-Pode apagar os arquivos `.webp` das opções descartadas também.
+Os `.webp` das opções descartadas (`hero-banner-a.webp`,
+`hero-banner-c.webp`) ficaram no repositório caso seja preciso comparar de
+novo, mas não são mais referenciados no código.
 
 As três artes (`public/media/brand/alternativas/*.png`) vieram com os mesmos
 erros de digitação recorrentes desse tipo de geração (ex.: "resistencia" sem
