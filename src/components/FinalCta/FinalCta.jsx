@@ -7,10 +7,10 @@ export default function FinalCta() {
   return (
     <section id="orcamento" className={`${styles.section} band`}>
       <Reveal as="div" className={styles.inner}>
-        <h2 className={`heading ${styles.title}`}>Diga quantos paletes você precisa</h2>
+        <h2 className={`heading ${styles.title}`}>Solicite seu orçamento de paletes</h2>
         <p className={styles.lede}>
-          Preencha os dados abaixo e a gente monta a mensagem pra você, ou chame direto no WhatsApp com
-          a quantidade, a medida do palete e o endereço de entrega.
+          Preencha os dados abaixo e montamos a mensagem para você, ou fale direto no WhatsApp com a
+          quantidade, a medida do palete e o endereço de entrega.
         </p>
 
         <QuoteForm />
