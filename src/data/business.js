@@ -15,7 +15,7 @@ export const business = {
   addressLines: ['Av. Adriano Bertozzi, 563', 'São Paulo - SP'],
   mapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS)}`,
   email: 'compactoworlddcs@gmail.com',
-  deliveryArea: 'São Paulo e região',
+  deliveryArea: 'Sob consulta',
   whatsapp: [
     {
       number: '5511921218541',
@@ -51,8 +51,8 @@ export const differentials = [
   },
   {
     label: 'LOGÍSTICA',
-    title: 'Entregamos em São Paulo',
-    highlight: 'São Paulo',
+    title: 'Entrega sob consulta',
+    highlight: 'sob consulta',
     text: 'Agilidade e segurança para sua empresa.'
   }
 ]
@@ -64,7 +64,7 @@ export const pbrSpec = [
   { label: 'MADEIRA', value: 'Eucalipto' },
   { label: 'CONDIÇÃO', value: 'Novo' },
   { label: 'CAPACIDADE DE CARGA', value: 'Sob consulta' },
-  { label: 'ENTREGA', value: 'São Paulo e região' }
+  { label: 'ENTREGA', value: 'Sob consulta' }
 ]
 
-export const heroFacts = ['Novos', '1ª qualidade', 'São Paulo']
+export const heroFacts = ['Novos', '1ª qualidade', 'Sob consulta']

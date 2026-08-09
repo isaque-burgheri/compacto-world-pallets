@@ -9,15 +9,15 @@ export default function Delivery() {
         <div>
           <p className={`eyebrow ${styles.eyebrow}`}>Área de entrega</p>
           <h2 className={`heading ${styles.title}`}>
-            Entregamos na capital
+            Entrega
             <br />
-            e na região
+            sob consulta,
             <br />
-            metropolitana
+            direto pra você
           </h2>
           <p className={styles.lede}>
-            Atendemos São Paulo e região com agilidade — do pedido ao recebimento dos seus paletes PBR
-            novos.
+            A cobertura de entrega varia de acordo com o pedido — fale com a gente pelo WhatsApp e
+            confirme as condições para o seu endereço.
           </p>
         </div>
 
